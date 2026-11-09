@@ -1,0 +1,12 @@
+# Build output
+/build/
+/build-*/
+
+# Editor and tooling state
+/compile_commands.json
+/.cache/
+/.qtcreator/
+*.user
+*.user.*
+.vscode/
+.idea/

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Visualit
+GenericName=Git Branch Visualizer
+Comment=Explore git branches and commits, and open them in the browser
+Exec=@CMAKE_INSTALL_FULL_BINDIR@/visualit %f
+Icon=visualit
+Terminal=false
+Categories=Development;RevisionControl;Qt;
+Keywords=git;branch;commit;graph;history;
