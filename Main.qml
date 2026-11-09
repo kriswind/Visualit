@@ -35,7 +35,7 @@ ApplicationWindow {
         repository: repo
         compact: window.compactView
         onCompactToggled: window.compactView = !window.compactView
-        onOpenRequested: folderDialog.open()
+        onOpenRequested: window.chooseRepository()
         onSearchRequested: (text, forward) => commitList.search(text, forward)
         onSearchDismissed: commitList.focusList()
     }
@@ -83,6 +83,17 @@ ApplicationWindow {
         }
     }
 
+    function chooseRepository() {
+        folderPicker.open(qsTr("Open git repository"), repo.valid ? repo.path : "", window)
+    }
+
+    // The system's own folder picker; the Qt dialog below is used only when no portal is available.
+    FolderPicker {
+        id: folderPicker
+        onAccepted: path => repo.open(path)
+        onUnavailable: folderDialog.open()
+    }
+
     FolderDialog {
         id: folderDialog
         title: qsTr("Open git repository")
@@ -104,7 +115,7 @@ ApplicationWindow {
     }
     Shortcut {
         sequences: [StandardKey.Open]
-        onActivated: folderDialog.open()
+        onActivated: window.chooseRepository()
     }
     Shortcut {
         sequences: [StandardKey.Refresh, "Ctrl+R"]

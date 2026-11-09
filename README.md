@@ -16,11 +16,13 @@ Browse the commit graph, inspect any commit, and press **Enter** to open it on t
 - **Commit details** with the full message, author and committer, clickable parent commits, and changed files with lines added and removed.
 - **Compact view** (Ctrl+M) that shows only the graph. Click a node to open the commit, or hover over it for a summary.
 - **Search** by message, author, email, hash or branch name.
+- **Native folder picker:** Open… (Ctrl+O) uses your desktop's own picker through the XDG desktop portal (the KDE/Dolphin dialog on Plasma, the GNOME one on GNOME). It falls back to Qt's built-in dialog when no portal is available.
 - Follows the system's light or dark setting.
 
 ## Requirements
 
 - Qt 6.8 or newer (Gui, Quick, QuickControls2), plus the Qt SVG plugin for the icon
+- Optional: Qt DBus and a running `xdg-desktop-portal` for the native folder picker
 - CMake 3.16 or newer and a C++20 compiler
 - `git` on `PATH`
 

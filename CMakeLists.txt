@@ -10,6 +10,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.8 REQUIRED COMPONENTS Gui Quick QuickControls2)
+# Optional: the native folder picker goes through the XDG desktop portal over D-Bus.
+find_package(Qt6 6.8 QUIET OPTIONAL_COMPONENTS DBus)
 
 qt_standard_project_setup(REQUIRES 6.8)
 
@@ -31,6 +33,8 @@ qt_add_qml_module(visualit
         commitgraph.h
         commitmodel.cpp
         commitmodel.h
+        folderpicker.cpp
+        folderpicker.h
         gitrepository.cpp
         gitrepository.h
     QML_FILES
@@ -60,6 +64,11 @@ target_link_libraries(visualit
         Qt6::Quick
         Qt6::QuickControls2
 )
+
+if(TARGET Qt6::DBus)
+    target_link_libraries(visualit PRIVATE Qt6::DBus)
+    target_compile_definitions(visualit PRIVATE VISUALIT_HAVE_DBUS=1)
+endif()
 
 install(TARGETS visualit
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
